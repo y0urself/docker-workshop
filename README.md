@@ -293,7 +293,7 @@ Especially on test and build systems this should be part of a cron job.
 
     tagref=$(docker images -q -f dangling=true | wc -l)
 
-    if [ "$tagref" != "0" ]; then0
+    if [ "$tagref" != "0" ]; then
             docker rmi $(docker images -q -f dangling=true)
     fi
 
