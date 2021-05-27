@@ -25,10 +25,10 @@ contents:
 ----------
 1. __prerequesits & expectations__
 1. __intro__
+1. __create docker images__
+1. __real world example__
 1. __docker command__
 1. __docker-compose command__
-1. __docker-compose at rewe__
-1. __create docker images__
 1. __feedback__
 
 prerequesits & expectations
@@ -299,58 +299,11 @@ Especially on test and build systems this should be part of a cron job.
         docker rmi $(docker images -q -f dangling=true)
     fi
 
-docker-compose
-================
-docker-compose is a simple tool to start multiple containers.
 
-Configuration by `docker-compose.yml`:
-
-    version: '2'
-    services:
-      web:
-        build: .
-        ports:
-          - "5000:5000"
-        volumes:
-          - .:/code
-        links:
-          - "redis"
-
-      redis:
-        image: redis
-
-
-docker-compose usage
-=====================
-    Usage:
-      docker-compose [options] [COMMAND] [ARGS...]
-      docker-compose -h|--help
-
-    Commands: (selection)
-      up                 Create and start containers
-      down               Stop and remove containers, networks, images, and volumes
-      build              Build or rebuild services
-      logs               View output from containers
-      ps                 List containers
-      pull               Pull service images
-      rm                 Remove stopped containers
-      start              Start services
-      stop               Stop services
-      .. there are some more ..
-
-docker-compose Exercise
-===================
-1. Setup a docker-compose project with:
-   - webserver with php
-   - database of choice (e.g. mysql, postgres, or nosql, ...)
-2. Implement a counter example im php
-
-
-docker-compose at rewe
+real world example
 ===================
 
-real-world-example rewe-article-connector
-
+... shell ...
 
 create docker images
 =====================
@@ -598,6 +551,53 @@ create docker images - Example nginx
     EXPOSE 80 443
 
     CMD ["nginx", "-g", "daemon off;"]
+
+
+docker-compose
+================
+docker-compose is a simple tool to start multiple containers.
+
+Configuration by `docker-compose.yml`:
+
+    version: '2'
+    services:
+      web:
+        build: .
+        ports:
+          - "5000:5000"
+        volumes:
+          - .:/code
+        links:
+          - "redis"
+
+      redis:
+        image: redis
+
+
+docker-compose usage
+=====================
+    Usage:
+      docker-compose [options] [COMMAND] [ARGS...]
+      docker-compose -h|--help
+
+    Commands: (selection)
+      up                 Create and start containers
+      down               Stop and remove containers, networks, images, and volumes
+      build              Build or rebuild services
+      logs               View output from containers
+      ps                 List containers
+      pull               Pull service images
+      rm                 Remove stopped containers
+      start              Start services
+      stop               Stop services
+      .. there are some more ..
+
+docker-compose Exercise
+===================
+1. Setup a docker-compose project with:
+   - webserver with php
+   - database of choice (e.g. mysql, postgres, or nosql, ...)
+2. Implement a counter example im php
 
 
 feedback
