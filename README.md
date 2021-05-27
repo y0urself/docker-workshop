@@ -280,24 +280,26 @@ docker - useful tricks: cleanup script
 =======================================
 You have to cleanup your local images and old containers regulary.
 
-    docker rm $(docker ps -q -a -f status=exited)
-    docker rmi $(docker images -q -f dangling=true)
+    docker system prune
 
-Especially on test and build systems this should be part of a cron job.
+    WARNING! This will remove:
+     - all stopped containers
+     - all networks not used by at least one container
+     - all dangling images
+     - all dangling build cache
 
-    #!/bin/bash
+    Are you sure you want to continue? [y/N]
 
-    exited=$(docker ps -q -a -f status=exited | wc -l | tr -d '[:space:]')
 
-    if [ "$exited" != "0" ]; then
-        docker rm $(docker ps -q -a -f status=exited)
-    fi
+    docker system prune -a 
 
-    tagref=$(docker images -q -f dangling=true | wc -l | tr -d '[:space:]')
+    WARNING! This will remove:
+    - all stopped containers
+    - all networks not used by at least one container
+    - all images without at least one container associated to them
+    - all build cache
 
-    if [ "$tagref" != "0" ]; then
-        docker rmi $(docker images -q -f dangling=true)
-    fi
+    Are you sure you want to continue? [y/N
 
 
 real world example
