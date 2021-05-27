@@ -25,9 +25,9 @@ contents:
 ----------
 1. __prerequesits & expectations__
 1. __intro__
+1. __docker command__
 1. __create docker images__
 1. __real world example__
-1. __docker command__
 1. __docker-compose command__
 1. __feedback__
 
