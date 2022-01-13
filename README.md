@@ -274,7 +274,7 @@ Exercise
 
 docker - useful tricks: cleanup script
 =======================================
-You have to cleanup your local images and old containers regulary.
+You have to cleanup your local images and old containers regularly.
 
     docker system prune
 
