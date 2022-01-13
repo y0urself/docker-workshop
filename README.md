@@ -158,15 +158,15 @@ list, tag & delete
 
 listing of downloaded images:
 
-    docker images
+    docker image ls
 
 give an image a new name (alias):
 
-    docker tag <oldname> <newname>
+    docker image tag <oldname> <newname>
 
 delete an image locally:
 
-    docker rmi <image>
+    docker image rm <image>
 
 docker run
 ===============
@@ -191,38 +191,38 @@ Exercise:
 ----------
 Start an nginx web server with a custom `index.html` file.
 
-docker ps
+docker container
 ========================
 
 List containers
 -----------------
 The running containers:
 
-    docker ps
+    docker container ls
 
 All containers:
 
-    docker ps -a
+    docker container ls -a
 
 
-docker - container livecycle
+docker - container lifecycle
 =========================
 
 Stop running containers:
 
-    docker stop <container..>
+    docker container stop <container..>
 
 Start stopped containers:
 
-    docker start <container..>
+    docker container start <container..>
 
 Kill running containers:
 
-    docker kill <container..>
+    docker container kill <container..>
 
 Remove containers:
 
-    docker rm <container..>
+    docker container rm <container..>
 
 
 docker - useful tricks: container id
@@ -231,12 +231,12 @@ docker - useful tricks: container id
 give your containers a name
 
     docker run --name my_webserver nginx
-    docker rm -f my_webserver
+    docker container rm -f my_webserver
 
 save the container id in shell variables
 
     c=$(docker run -d nginx)
-    docker rm -f $c
+    docker container rm -f $c
 
 start containers in foreground and with `--rm`, when playing arround:
 
@@ -258,13 +258,13 @@ logs
 --------
 See the logs (stdout) of the container.
 
-    docker logs -f <container>
+    docker container logs -f <container>
 
 copy
 -------
 copy files from and to docker container, e.g.
 
-    docker cp my_webserver:/etc/nginx/nginx.conf ~/
+    docker container cp my_webserver:/etc/nginx/nginx.conf ~/
 
 docker - interaction and debugging
 ==========================
