@@ -495,6 +495,12 @@ Example:
 
     ADD configs.tar.gz /etc/service/
 
+Hint:
+
+The [docker best practices guide](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#add-or-copy)
+advises to always prefer `COPY` over `ADD`. Consider `ADD` as legacy command only
+mentioned for completeness.
+
 create docker images - Dockerfile
 =====================
 
