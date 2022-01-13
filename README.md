@@ -338,7 +338,7 @@ The `FROM` instruction sets the Base Image:
 
 Example:
 
-    FROM nginx:15:04
+    FROM nginx:15.04
 
 create docker images - Dockerfile
 =====================
