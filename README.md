@@ -99,7 +99,7 @@ docker
 --------------------
 * manage images & containers (create, start, list etc.)
 * installation instructions: <https://docs.docker.com/installation/>
-* installation in Ubuntu and Debian: `curl https://get.docker.com/ | sh`
+* installation in Ubuntu and Debian: `apt-get install docker.io`
 
 docker-compose
 --------------------
