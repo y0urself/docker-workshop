@@ -272,7 +272,7 @@ Exercise
 3. Watch the webserver logs
 4. compare the output of `ps aux` from your container with the host
 
-docker - useful tricks: cleanup script
+docker - useful tricks: cleanup
 =======================================
 You have to cleanup your local images and old containers regularly.
 
@@ -287,7 +287,7 @@ You have to cleanup your local images and old containers regularly.
     Are you sure you want to continue? [y/N]
 
 
-    docker system prune -a 
+    docker system prune -a
 
     WARNING! This will remove:
     - all stopped containers
@@ -295,8 +295,31 @@ You have to cleanup your local images and old containers regularly.
     - all images without at least one container associated to them
     - all build cache
 
-    Are you sure you want to continue? [y/N
+    Are you sure you want to continue? [y/N]
 
+docker - useful tricks: cleanup
+=======================================
+Alternatively cleanup your local images and containers separately
+
+    docker image prune
+
+    WARNING! This will remove all dangling images.
+    Are you sure you want to continue? [y/N]
+
+    docker container prune
+
+    WARNING! This will remove all stopped containers.
+    Are you sure you want to continue? [y/N]
+
+    docker volume prune
+
+    WARNING! This will remove all local volumes not used by at least one container.
+    Are you sure you want to continue? [y/N]
+
+    docker network prune
+
+    WARNING! This will remove all custom networks not used by at least one container.
+    Are you sure you want to continue? [y/N]
 
 real world example
 ===================
