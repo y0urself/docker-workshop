@@ -107,11 +107,6 @@ docker-compose
 * simple tool for local service orchestration
 * installation instructions: <https://docs.docker.com/compose/install/>
 
-docker-machine
---------------------
-* run docker engine on virtual and/or remote hostname
-* installation instructions: <https://docs.docker.com/machine/install-machine/>
-
 intro: tools
 ===============
 
