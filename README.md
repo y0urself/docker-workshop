@@ -167,7 +167,7 @@ delete an image locally:
 docker run
 ===============
 
-Start a new container
+Start a new container from an image
 
     docker run <imagename>
 
