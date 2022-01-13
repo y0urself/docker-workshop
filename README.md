@@ -13,7 +13,7 @@ to run locally use any of these: <https://gist.github.com/willurd/5720255>
 e.g.
 
 ```
-$ python -m SimpleHTTPServer 8000
+$ python3 -m http.server 8000
 ```
 
 
