@@ -565,8 +565,8 @@ Configuration by `docker-compose.yml`:
           - "5000:5000"
         volumes:
           - .:/code
-        links:
-          - "redis"
+        depends_on:
+          - redis
 
       redis:
         image: redis
