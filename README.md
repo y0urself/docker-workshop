@@ -104,6 +104,7 @@ docker
 docker-compose
 --------------------
 * tool for defining and running multi-container Docker applications
+* simple tool for local service orchestration
 * installation instructions: <https://docs.docker.com/compose/install/>
 
 docker-machine
