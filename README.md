@@ -582,38 +582,43 @@ docker-compose is a simple tool to start multiple containers.
 
 Configuration by `docker-compose.yml`:
 
-    version: '2'
-    services:
-      web:
-        build: .
-        ports:
-          - "5000:5000"
-        volumes:
-          - .:/code
-        depends_on:
-          - redis
+```yaml
+version: '3.9'
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/code
+    depends_on:
+      - redis
 
-      redis:
-        image: redis
+  redis:
+    image: redis
+```
 
 
 docker-compose usage
 =====================
-    Usage:
-      docker-compose [options] [COMMAND] [ARGS...]
-      docker-compose -h|--help
 
-    Commands: (selection)
-      up                 Create and start containers
-      down               Stop and remove containers, networks, images, and volumes
-      build              Build or rebuild services
-      logs               View output from containers
-      ps                 List containers
-      pull               Pull service images
-      rm                 Remove stopped containers
-      start              Start services
-      stop               Stop services
-      .. there are some more ..
+```
+Usage:
+  docker-compose [options] [COMMAND] [ARGS...]
+  docker-compose -h|--help
+
+Commands: (selection)
+  up                 Create and start containers
+  down               Stop and remove containers, networks, images, and volumes
+  build              Build or rebuild services
+  logs               View output from containers
+  ps                 List containers
+  pull               Pull service images
+  rm                 Remove stopped containers
+  start              Start services
+  stop               Stop services
+  .. there are some more ..
+```
 
 docker-compose Exercise
 ===================
