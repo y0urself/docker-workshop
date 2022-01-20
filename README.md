@@ -556,29 +556,25 @@ Benefit:
 
 create docker images - Example nginx
 =================
-    FROM debian:jessie
 
-    MAINTAINER NGINX Docker Maintainers "docker-maint@nginx.com"
+```dockerfile
+FROM debian:stable
 
-    RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 && \
-        echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list
+RUN apt-get update && \
+    apt-get install -y ca-certificates nginx && \
+    rm -rf /var/lib/apt/lists/*
 
-    ENV NGINX_VERSION 1.9.3-1~jessie
+# forward request and error logs to docker log collector
+RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
+    ln -sf /dev/stderr /var/log/nginx/error.log
 
-    RUN apt-get update && \
-        apt-get install -y ca-certificates nginx=${NGINX_VERSION} && \
-        rm -rf /var/lib/apt/lists/*
+VOLUME ["/var/cache/nginx"]
 
-    # forward request and error logs to docker log collector
-    RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
-        ln -sf /dev/stderr /var/log/nginx/error.log
+EXPOSE 80 443
 
-    VOLUME ["/var/cache/nginx"]
+CMD ["nginx", "-g", "daemon off;"]
 
-    EXPOSE 80 443
-
-    CMD ["nginx", "-g", "daemon off;"]
-
+```
 
 docker-compose
 ================
@@ -622,9 +618,9 @@ docker-compose usage
 docker-compose Exercise
 ===================
 1. Setup a docker-compose project with:
-   - webserver with php
+   - webserver with php/python
    - database of choice (e.g. mysql, postgres, or nosql, ...)
-2. Implement a counter example im php
+2. Implement a counter example in php/python
 
 
 feedback
