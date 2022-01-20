@@ -13,7 +13,7 @@ to run locally use any of these: <https://gist.github.com/willurd/5720255>
 e.g.
 
 ```
-$ python -m SimpleHTTPServer 8000
+$ python3 -m http.server 8000
 ```
 
 
@@ -99,17 +99,13 @@ docker
 --------------------
 * manage images & containers (create, start, list etc.)
 * installation instructions: <https://docs.docker.com/installation/>
-* installation in Ubuntu and Debian: `curl https://get.docker.com/ | sh`
+* installation in Ubuntu and Debian: `apt-get install docker.io`
 
 docker-compose
 --------------------
 * tool for defining and running multi-container Docker applications
+* simple tool for local service orchestration
 * installation instructions: <https://docs.docker.com/compose/install/>
-
-docker-machine
---------------------
-* run docker engine on virtual and/or remote hostname
-* installation instructions: <https://docs.docker.com/machine/install-machine/>
 
 intro: tools
 ===============
@@ -171,7 +167,7 @@ delete an image locally:
 docker run
 ===============
 
-Start a new container
+Start a new container from an image
 
     docker run <imagename>
 
@@ -276,9 +272,9 @@ Exercise
 3. Watch the webserver logs
 4. compare the output of `ps aux` from your container with the host
 
-docker - useful tricks: cleanup script
+docker - useful tricks: cleanup
 =======================================
-You have to cleanup your local images and old containers regulary.
+You have to cleanup your local images and old containers regularly.
 
     docker system prune
 
@@ -291,7 +287,7 @@ You have to cleanup your local images and old containers regulary.
     Are you sure you want to continue? [y/N]
 
 
-    docker system prune -a 
+    docker system prune -a
 
     WARNING! This will remove:
     - all stopped containers
@@ -299,8 +295,31 @@ You have to cleanup your local images and old containers regulary.
     - all images without at least one container associated to them
     - all build cache
 
-    Are you sure you want to continue? [y/N
+    Are you sure you want to continue? [y/N]
 
+docker - useful tricks: cleanup
+=======================================
+Alternatively cleanup your local images and containers separately
+
+    docker image prune
+
+    WARNING! This will remove all dangling images.
+    Are you sure you want to continue? [y/N]
+
+    docker container prune
+
+    WARNING! This will remove all stopped containers.
+    Are you sure you want to continue? [y/N]
+
+    docker volume prune
+
+    WARNING! This will remove all local volumes not used by at least one container.
+    Are you sure you want to continue? [y/N]
+
+    docker network prune
+
+    WARNING! This will remove all custom networks not used by at least one container.
+    Are you sure you want to continue? [y/N]
 
 real world example
 ===================
@@ -342,7 +361,7 @@ The `FROM` instruction sets the Base Image:
 
 Example:
 
-    FROM nginx:15:04
+    FROM nginx:15.04
 
 create docker images - Dockerfile
 =====================
@@ -535,8 +554,8 @@ create docker images - Example nginx
 
     MAINTAINER NGINX Docker Maintainers "docker-maint@nginx.com"
 
-    RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62
-    RUN echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list
+    RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 && \
+        echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list
 
     ENV NGINX_VERSION 1.9.3-1~jessie
 
@@ -545,8 +564,8 @@ create docker images - Example nginx
         rm -rf /var/lib/apt/lists/*
 
     # forward request and error logs to docker log collector
-    RUN ln -sf /dev/stdout /var/log/nginx/access.log
-    RUN ln -sf /dev/stderr /var/log/nginx/error.log
+    RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
+        ln -sf /dev/stderr /var/log/nginx/error.log
 
     VOLUME ["/var/cache/nginx"]
 
@@ -569,8 +588,8 @@ Configuration by `docker-compose.yml`:
           - "5000:5000"
         volumes:
           - .:/code
-        links:
-          - "redis"
+        depends_on:
+          - redis
 
       redis:
         image: redis
